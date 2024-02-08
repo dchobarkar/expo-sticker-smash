@@ -15,8 +15,6 @@ import EmojiPicker from "./components/EmojiPicker";
 import EmojiList from "./components/EmojiList";
 import EmojiSticker from "./components/EmojiSticker";
 
-const PlaceHolderIamge = require("./assets/images/background-image.png");
-
 export default function App() {
   const imageRef = useRef();
   const [status, requestPermission] = MediaLibrary.usePermissions();
@@ -25,9 +23,7 @@ export default function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptins, setShowAppOptions] = useState(false);
 
-  if (status === null) {
-    requestPermission();
-  }
+  if (status === null) requestPermission();
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -38,12 +34,10 @@ export default function App() {
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
       setShowAppOptions(true);
-    } else {
-      alert("You did not select any image.");
-    }
+    } else alert("You did not select any image.");
   };
 
-  const Reset = () => {
+  const onReset = () => {
     setShowAppOptions(false);
   };
 
@@ -96,6 +90,7 @@ export default function App() {
           />
         </View>
       </View>
+
       {showAppOptins ? (
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
@@ -121,6 +116,7 @@ export default function App() {
           />
         </View>
       )}
+
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
         <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
         {pickedEmoji && (

@@ -27,6 +27,7 @@ export default function Button({ label, theme, onPress }) {
       </View>
     );
   }
+
   return (
     <View style={styles.buttonContainer}>
       <Pressable style={styles.button} onPress={onPress}>
